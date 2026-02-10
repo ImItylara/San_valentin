@@ -32,14 +32,14 @@ body {
 /* ===== SOBRE ===== */
 
 #sobre {
-    width: 320px;
-    height: 210px;
+    width: min(90vw, 320px);
+    aspect-ratio: 16/10;
     background: #f5e6d3;
     position: relative;
     transform: translateY(200vh) scale(0.5);
     animation: volar 2.5s ease-out forwards;
     box-shadow: 0 25px 50px rgba(0,0,0,0.3);
-    border-radius: 6px;
+    border-radius: 8px;
 }
 
 @keyframes volar {
@@ -54,40 +54,41 @@ body {
     clip-path: polygon(0 0, 50% 55%, 100% 0);
     transform-origin: top;
     transition: 1s;
+    border-radius: 8px;
 }
 
 #textoSobre {
     position: absolute;
     width: 100%;
     text-align: center;
-    bottom: 20px;
+    bottom: 15%;
     font-family: 'Great Vibes', cursive;
-    font-size: 2.2rem;
+    font-size: clamp(1.5rem, 5vw, 2.2rem);
     color: #b76e79;
 }
 
 #carta {
     position: absolute;
-    width: 270px;
-    height: 185px;
+    width: 85%;
+    height: 75%;
     background: white;
-    top: 12px;
-    left: 25px;
-    padding: 25px;
+    top: 8%;
+    left: 7.5%;
+    padding: 20px;
     box-sizing: border-box;
     transform: translateY(0);
     transition: 1s;
     opacity: 0;
     color: #b76e79;
     font-family: 'Great Vibes', cursive;
-    font-size: 2rem;
-    border-radius: 4px;
+    font-size: clamp(1.5rem, 4vw, 2rem);
+    border-radius: 6px;
 }
 
 .abierto #tapa { transform: rotateX(180deg); }
 
 .abierto #carta {
-    transform: translateY(-130px);
+    transform: translateY(-120%);
     opacity: 1;
 }
 
@@ -98,12 +99,11 @@ body {
     flex-direction: column;
     align-items: center;
     text-align: center;
-    position: relative;
 }
 
 h1 {
     font-family: 'Great Vibes', cursive;
-    font-size: 5rem;
+    font-size: clamp(2.5rem, 8vw, 5rem);
     margin: 0;
     animation: aparecerTitulo 2s ease forwards;
 }
@@ -126,7 +126,7 @@ h1 {
 
 #pregunta h2 {
     font-family: 'Great Vibes', cursive;
-    font-size: 3.5rem;
+    font-size: clamp(1.8rem, 6vw, 3.5rem);
     animation: brillo 2s infinite alternate;
 }
 
@@ -144,7 +144,7 @@ button {
     padding: 12px 25px;
     border: none;
     border-radius: 30px;
-    font-size: 1.1rem;
+    font-size: clamp(0.9rem, 3vw, 1.1rem);
     cursor: pointer;
     margin: 10px;
     transition: 0.3s;
@@ -153,6 +153,10 @@ button {
 #si {
     background: white;
     color: #ff4e75;
+}
+
+#si:hover {
+    transform: scale(1.1);
 }
 
 #no {
@@ -176,28 +180,23 @@ button {
     100% { transform: translateY(-10vh); opacity: 0; }
 }
 
+/* ===== MENSAJE FINAL ===== */
+
 #final {
     position: absolute;
     inset: 0;
     display: none;
     justify-content: center;
     align-items: center;
-    background: rgba(255, 78, 117, 0.85);
+    background: rgba(255, 78, 117, 0.9);
     backdrop-filter: blur(10px);
-    animation: fadeIn 1.5s ease forwards;
     text-align: center;
 }
 
 #final h2 {
     font-family: 'Great Vibes', cursive;
-    font-size: 4rem;
-    color: white;
+    font-size: clamp(2rem, 7vw, 4rem);
     animation: latido 1.5s infinite;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
 }
 
 @keyframes latido {
@@ -205,7 +204,6 @@ button {
     50% { transform: scale(1.08); }
     100% { transform: scale(1); }
 }
-
 
 </style>
 </head>
@@ -235,7 +233,6 @@ button {
     <h2>Sabía que diría que sí 💖</h2>
 </div>
 
-
 <script>
 
 let estado = 0;
@@ -251,9 +248,11 @@ function manejarPantalla() {
     else if (estado === 1) {
         document.getElementById("sobre").style.display = "none";
         document.getElementById("sanvalentin").style.display = "flex";
+
         setTimeout(() => {
             document.getElementById("pregunta").style.display = "block";
         }, 1500);
+
         estado = 2;
     }
 }
@@ -280,11 +279,10 @@ function respuesta(e) {
     document.getElementById("final").style.display = "flex";
 }
 
-
 function moverNo() {
     const btn = document.getElementById("no");
-    btn.style.top = Math.random() * 200 - 100 + "px";
-    btn.style.left = Math.random() * 200 - 100 + "px";
+    btn.style.top = (Math.random() * 200 - 100) + "px";
+    btn.style.left = (Math.random() * 200 - 100) + "px";
 }
 
 </script>
