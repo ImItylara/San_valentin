@@ -5,116 +5,286 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>San Valentín</title>
 
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;500&display=swap" rel="stylesheet">
+
 <style>
+
 body {
     margin: 0;
-    background: black;
-    color: white;
-    font-family: 'Arial', sans-serif;
-    text-align: center;
     overflow: hidden;
-}
-
-#inicio {
-    position: absolute;
-    width: 100%;
-    height: 100vh;
+    background: linear-gradient(-45deg, #ff4e75, #ff6f91, #ff85a2, #ff4e75);
+    background-size: 400% 400%;
+    animation: fondoAnimado 12s ease infinite;
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
-    cursor: pointer;
+    height: 100vh;
+    font-family: 'Poppins', sans-serif;
+    color: white;
 }
 
-#inicio h1 {
-    font-size: 3rem;
-    color: #ff4d6d;
+@keyframes fondoAnimado {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
 }
 
-#inicio p {
-    font-size: 1.2rem;
-    opacity: 0.8;
+/* ===== SOBRE ===== */
+
+#sobre {
+    width: 320px;
+    height: 210px;
+    background: #f5e6d3;
+    position: relative;
+    transform: translateY(200vh) scale(0.5);
+    animation: volar 2.5s ease-out forwards;
+    box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+    border-radius: 6px;
 }
 
-#contenido {
-    display: none;
+@keyframes volar {
+    to { transform: translateY(0) scale(1); }
+}
+
+#tapa {
+    width: 100%;
+    height: 100%;
+    background: #e8d5bd;
+    position: absolute;
+    clip-path: polygon(0 0, 50% 55%, 100% 0);
+    transform-origin: top;
+    transition: 1s;
+}
+
+#textoSobre {
     position: absolute;
     width: 100%;
-    height: 100vh;
+    text-align: center;
+    bottom: 20px;
+    font-family: 'Great Vibes', cursive;
+    font-size: 2.2rem;
+    color: #b76e79;
 }
 
-.foto {
+#carta {
     position: absolute;
-    width: 200px;
-    height: 200px;
-    object-fit: cover;
-    border-radius: 20px;
+    width: 270px;
+    height: 185px;
+    background: white;
+    top: 12px;
+    left: 25px;
+    padding: 25px;
+    box-sizing: border-box;
+    transform: translateY(0);
+    transition: 1s;
     opacity: 0;
-    animation: aparecer 3s ease-in-out forwards;
+    color: #b76e79;
+    font-family: 'Great Vibes', cursive;
+    font-size: 2rem;
+    border-radius: 4px;
 }
 
-@keyframes aparecer {
-    0% { opacity: 0; transform: scale(0.5); }
-    50% { opacity: 1; }
-    100% { opacity: 0; transform: scale(1.2); }
+.abierto #tapa { transform: rotateX(180deg); }
+
+.abierto #carta {
+    transform: translateY(-130px);
+    opacity: 1;
+}
+
+/* ===== SAN VALENTIN ===== */
+
+#sanvalentin {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    position: relative;
+}
+
+h1 {
+    font-family: 'Great Vibes', cursive;
+    font-size: 5rem;
+    margin: 0;
+    animation: aparecerTitulo 2s ease forwards;
+}
+
+@keyframes aparecerTitulo {
+    from { opacity: 0; transform: scale(0.5); }
+    to { opacity: 1; transform: scale(1); }
 }
 
 #pregunta {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 2rem;
-    color: #ff4d6d;
     display: none;
-    animation: fadeIn 2s forwards;
+    margin-top: 20px;
+    animation: aparecerPregunta 2s ease forwards;
+}
+
+@keyframes aparecerPregunta {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+#pregunta h2 {
+    font-family: 'Great Vibes', cursive;
+    font-size: 3.5rem;
+    animation: brillo 2s infinite alternate;
+}
+
+@keyframes brillo {
+    from { text-shadow: 0 0 10px white; }
+    to { text-shadow: 0 0 30px #fff, 0 0 50px #ff99aa; }
+}
+
+.botones {
+    margin-top: 20px;
+    position: relative;
+}
+
+button {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 30px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    margin: 10px;
+    transition: 0.3s;
+}
+
+#si {
+    background: white;
+    color: #ff4e75;
+}
+
+#no {
+    background: #ff4e75;
+    color: white;
+    position: absolute;
+}
+
+/* ===== CORAZONES ===== */
+
+.corazon {
+    position: absolute;
+    animation: flotar linear infinite;
+    pointer-events: none;
+}
+
+@keyframes flotar {
+    0% { transform: translateY(100vh); opacity: 0; }
+    20% { opacity: 1; }
+    80% { opacity: 1; }
+    100% { transform: translateY(-10vh); opacity: 0; }
+}
+
+#final {
+    position: absolute;
+    inset: 0;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    background: rgba(255, 78, 117, 0.85);
+    backdrop-filter: blur(10px);
+    animation: fadeIn 1.5s ease forwards;
+    text-align: center;
+}
+
+#final h2 {
+    font-family: 'Great Vibes', cursive;
+    font-size: 4rem;
+    color: white;
+    animation: latido 1.5s infinite;
 }
 
 @keyframes fadeIn {
     from { opacity: 0; }
     to { opacity: 1; }
 }
+
+@keyframes latido {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.08); }
+    100% { transform: scale(1); }
+}
+
+
 </style>
 </head>
+<body onclick="manejarPantalla()">
 
-<body>
+<div id="sobre">
+    <div id="tapa"></div>
+    <div id="textoSobre">Tocar aquí</div>
+    <div id="carta">
+        De: Christopher<br>
+        Para: Brittany
+    </div>
+</div>
 
-<div id="inicio" onclick="empezar()">
+<div id="sanvalentin">
     <h1>San Valentín</h1>
-    <p>Toque la pantalla</p>
+    <div id="pregunta">
+        <h2>¿Puedo ser su San Valentín?</h2>
+        <div class="botones">
+            <button id="si" onclick="respuesta(event)">Sí 💖</button>
+            <button id="no" onmouseover="moverNo()">No</button>
+        </div>
+    </div>
 </div>
 
-<div id="contenido">
-    <div id="pregunta">¿Puedo ser su San Valentín?</div>
+<div id="final">
+    <h2>Sabía que diría que sí 💖</h2>
 </div>
+
 
 <script>
 
-function empezar() {
-    document.getElementById("inicio").style.display = "none";
-    document.getElementById("contenido").style.display = "block";
+let estado = 0;
+let corazonesActivos = false;
 
-    let fotos = ["foto1.jpg", "foto2.jpg", "foto3.jpg"];
+function manejarPantalla() {
 
-    fotos.forEach((src, index) => {
+    if (estado === 0) {
+        document.getElementById("sobre").classList.add("abierto");
+        iniciarCorazones();
+        estado = 1;
+    } 
+    else if (estado === 1) {
+        document.getElementById("sobre").style.display = "none";
+        document.getElementById("sanvalentin").style.display = "flex";
         setTimeout(() => {
-            let img = document.createElement("img");
-            img.src = src;
-            img.className = "foto";
-            img.style.top = Math.random() * 70 + "%";
-            img.style.left = Math.random() * 70 + "%";
-            document.getElementById("contenido").appendChild(img);
+            document.getElementById("pregunta").style.display = "block";
+        }, 1500);
+        estado = 2;
+    }
+}
 
-            setTimeout(() => {
-                img.remove();
-            }, 3000);
+function iniciarCorazones() {
+    if (corazonesActivos) return;
+    corazonesActivos = true;
+    setInterval(crearCorazon, 600);
+}
 
-        }, index * 1500);
-    });
+function crearCorazon() {
+    const corazon = document.createElement("div");
+    corazon.className = "corazon";
+    corazon.innerHTML = ["💖","💗","💘","💕","💝"][Math.floor(Math.random()*5)];
+    corazon.style.left = Math.random() * 100 + "vw";
+    corazon.style.fontSize = (Math.random() * 20 + 15) + "px";
+    corazon.style.animationDuration = (Math.random() * 5 + 6) + "s";
+    document.body.appendChild(corazon);
+    setTimeout(() => corazon.remove(), 10000);
+}
 
-    setTimeout(() => {
-        document.getElementById("pregunta").style.display = "block";
-    }, fotos.length * 1500 + 2000);
+function respuesta(e) {
+    e.stopPropagation();
+    document.getElementById("final").style.display = "flex";
+}
+
+
+function moverNo() {
+    const btn = document.getElementById("no");
+    btn.style.top = Math.random() * 200 - 100 + "px";
+    btn.style.left = Math.random() * 200 - 100 + "px";
 }
 
 </script>
